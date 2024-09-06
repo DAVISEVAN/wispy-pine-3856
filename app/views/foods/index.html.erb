@@ -3,10 +3,10 @@
 <ul id="food-results">
   <% @foods.each do |food| %>
     <li class="food">
-      <p><strong>GTIN/UPC:</strong> <%= food['gtinUpc'] %></p>
-      <p><strong>Description:</strong> <%= food['description'] %></p>
-      <p><strong>Brand Owner:</strong> <%= food['brandOwner'] %></p>
-      <p><strong>Ingredients:</strong> <%= food['ingredients'] %></p>
+      <p><strong>GTIN/UPC:</strong> <%= food.gtin_upc %></p>
+      <p><strong>Description:</strong> <%= food.description %></p>
+      <p><strong>Brand Owner:</strong> <%= food.brand_owner %></p>
+      <p><strong>Ingredients:</strong> <%= food.ingredients %></p>
     </li>
   <% end %>
 </ul>
