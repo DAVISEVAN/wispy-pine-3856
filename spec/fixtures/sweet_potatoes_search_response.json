@@ -1,0 +1,37 @@
+{
+    "totalHits": 56910,
+    "currentPage": 1,
+    "totalPages": 5691,
+    "pageList": [1,2,3,4,5,6,7,8,9,10],
+    "foodSearchCriteria": {
+      "query": "sweet potatoes",
+      "generalSearchInput": "sweet potatoes",
+      "pageNumber": 1,
+      "numberOfResultsPerPage": 50,
+      "pageSize": 10,
+      "requireAllWords": false
+    },
+    "foods": [
+      {
+        "fdcId": 2427040,
+        "description": "SWEET POTATOES",
+        "dataType": "Branded",
+        "gtinUpc": "046567926179",
+        "publishedDate": "2022-12-22",
+        "brandOwner": "Raley's",
+        "brandName": "RALEY'S",
+        "ingredients": "SWEET POTATOES.",
+        "marketCountry": "United States",
+        "foodCategory": "Pre-Packaged Fruit & Vegetables",
+        "modifiedDate": "2019-01-05",
+        "dataSource": "LI",
+        "packageWeight": "12 oz/340 g",
+        "servingSizeUnit": "g",
+        "servingSize": 85.0,
+        "householdServingFullText": "3/4 cup",
+        "shortDescription": "",
+        "tradeChannels": ["NO_TRADE_CHANNEL"]
+      }
+    ]
+  }
+  

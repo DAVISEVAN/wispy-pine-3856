@@ -1,30 +1,33 @@
 require 'rails_helper'
+require 'webmock/rspec'
 
 RSpec.describe 'Food Search', type: :feature do
   before do
-    visit root_path
+    fixture_data = File.read(Rails.root.join('spec', 'fixtures', 'sweet_potatoes_search_response.json'))
+    stub_request(:get, "https://api.nal.usda.gov/fdc/v1/foods/search")
+      .with(query: hash_including({ "query" => "sweet potatoes", "api_key" => Rails.application.credentials.usda[:api_key] }))
+      .to_return(body: fixture_data, headers: { 'Content-Type' => 'application/json' })
   end
 
   it 'allows the user to search for foods by ingredient and displays results' do
-    # Fill in the search form with "sweet potatoes" and click "Search"
+    visit root_path
     fill_in 'ingredient', with: 'sweet potatoes'
     click_button 'Search'
 
-    # Expect the user to be on the "/foods" page
     expect(current_path).to eq(foods_path)
 
-    # Expect to see the total number of items returned by the search
-    expect(page).to have_content("Total Results: 30000")
+    total_results_text = find('h2').text
+    total_results_number = total_results_text.scan(/\d+/).first.to_i
+    expect(total_results_number).to be > 30000
 
-    # Expect to see a list of 10 foods with GTIN/UPC, description, brand owner, and ingredients
     within '#food-results' do
-      expect(page).to have_css('.food', count: 10)
+      expect(page).to have_css('.food', count: 1)
 
       within first('.food') do
-        expect(page).to have_content('GTIN/UPC:')
-        expect(page).to have_content('Description:')
-        expect(page).to have_content('Brand Owner:')
-        expect(page).to have_content('Ingredients:')
+        expect(page).to have_content('GTIN/UPC: 046567926179')
+        expect(page).to have_content('Description: SWEET POTATOES')
+        expect(page).to have_content('Brand Owner: Raley\'s')
+        expect(page).to have_content('Ingredients: SWEET POTATOES.')
       end
     end
   end
